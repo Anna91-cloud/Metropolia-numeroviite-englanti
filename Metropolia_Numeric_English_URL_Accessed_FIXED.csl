@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text" default-locale="en-GB">
+  <info>
+    <title>Metropolia AMK - Numeric References (English)</title>
+    <title-short>Metropolia Numeric</title-short>
+    <id>http://www.zotero.org/styles/metropolia-amk-numeric-english-custom</id>
+    <link href="http://www.zotero.org/styles/metropolia-amk-numeric-english-custom" rel="self"/>
+    <category citation-format="numeric"/>
+    <updated>2026-08-12T00:00:00+00:00</updated>
+  </info>
+
+  <macro name="author">
+    <names variable="author">
+      <name name-as-sort-order="all" sort-separator=", " initialize-with=". " delimiter=" &amp; " delimiter-precedes-last="never"/>
+      <substitute>
+        <names variable="editor">
+          <name name-as-sort-order="all" sort-separator=", " initialize-with=". " delimiter=" &amp; "/>
+        </names>
+        <text variable="title"/>
+      </substitute>
+    </names>
+  </macro>
+
+  <macro name="year">
+    <date variable="issued">
+      <date-part name="year"/>
+    </date>
+  </macro>
+
+  <macro name="accessed">
+    <date variable="accessed" prefix="Accessed ">
+      <date-part name="day"/>
+      <date-part name="month" form="short" prefix=" "/>
+      <date-part name="year" prefix=" "/>
+    </date>
+  </macro>
+
+  <macro name="url">
+    <text variable="URL"/>
+  </macro>
+
+  <citation collapse="citation-number">
+    <layout prefix="[" suffix="]" delimiter=", ">
+      <text variable="citation-number"/>
+    </layout>
+  </citation>
+
+  <bibliography>
+    <sort>
+      <key variable="citation-number"/>
+    </sort>
+    <layout suffix=".">
+      <text variable="citation-number" suffix=" "/>
+
+      <choose>
+        <if type="webpage post-weblog" match="any">
+          <text macro="author" suffix=". "/>
+          <text macro="year" suffix=". "/>
+          <text variable="title" suffix=". "/>
+          <text value="Online material. "/>
+          <text variable="container-title" suffix=". "/>
+          <text macro="url" suffix=". "/>
+          <text macro="accessed"/>
+        </if>
+
+        <else-if type="article-journal">
+          <text macro="author" suffix=". "/>
+          <text macro="year" suffix=". "/>
+          <text variable="title" suffix=". "/>
+          <text variable="container-title" suffix=" "/>
+          <text variable="volume"/>
+          <text variable="issue" prefix=" (" suffix="), "/>
+          <text variable="page"/>
+          <choose>
+            <if variable="DOI">
+              <text variable="DOI" prefix=". https://doi.org/"/>
+            </if>
+            <else-if variable="URL">
+              <text variable="URL" prefix=". "/>
+            </else>
+          </choose>
+        </else-if>
+
+        <else-if type="book">
+          <text macro="author" suffix=". "/>
+          <text macro="year" suffix=". "/>
+          <text variable="title" suffix=". "/>
+          <text variable="edition" suffix=". ed. "/>
+          <group delimiter=": ">
+            <text variable="publisher-place"/>
+            <text variable="publisher"/>
+          </group>
+          <choose>
+            <if variable="URL">
+              <text variable="URL" prefix=". "/>
+            </if>
+          </choose>
+        </else-if>
+
+        <else-if type="chapter">
+          <text macro="author" suffix=". "/>
+          <text macro="year" suffix=". "/>
+          <text variable="title" suffix=". "/>
+          <text value="In "/>
+          <names variable="editor">
+            <name name-as-sort-order="all" sort-separator=", " initialize-with=". " delimiter=" &amp; " delimiter-precedes-last="never"/>
+          </names>
+          <text value=" (eds.). "/>
+          <text variable="container-title" suffix=". "/>
+          <text variable="publisher-place"/>
+          <text value=": "/>
+          <text variable="publisher"/>
+          <text variable="page" prefix=", "/>
+          <choose>
+            <if variable="URL">
+              <text variable="URL" prefix=". "/>
+            </if>
+          </choose>
+        </else-if>
+
+        <else-if type="thesis">
+          <text macro="author" suffix=". "/>
+          <text macro="year" suffix=". "/>
+          <text variable="title" suffix=". "/>
+          <text variable="genre" suffix=". "/>
+          <text variable="publisher" suffix=". "/>
+          <choose>
+            <if variable="URL">
+              <text variable="URL" prefix=". "/>
+              <text macro="accessed" prefix=". "/>
+            </if>
+          </choose>
+        </else-if>
+
+        <else-if type="report">
+          <text macro="author" suffix=". "/>
+          <text macro="year" suffix=". "/>
+          <text variable="title" suffix=". "/>
+          <text variable="genre" suffix=". "/>
+          <group delimiter=": ">
+            <text variable="publisher-place"/>
+            <text variable="publisher"/>
+          </group>
+          <choose>
+            <if variable="URL">
+              <text variable="URL" prefix=". "/>
+              <text macro="accessed" prefix=". "/>
+            </if>
+          </choose>
+        </else-if>
+
+        <else-if type="standard">
+          <text macro="author" suffix=". "/>
+          <text macro="year" suffix=". "/>
+          <text variable="title" suffix=". "/>
+          <text variable="publisher" suffix=". "/>
+          <choose>
+            <if variable="URL">
+              <text variable="URL" prefix=". "/>
+              <text macro="accessed" prefix=". "/>
+            </if>
+          </choose>
+        </else-if>
+
+        <else>
+          <text macro="author" suffix=". "/>
+          <text macro="year" suffix=". "/>
+          <text variable="title" suffix=". "/>
+          <choose>
+            <if variable="publisher-place">
+              <text variable="publisher-place"/>
+              <text variable="publisher" prefix=": "/>
+            </if>
+            <else>
+              <text variable="publisher"/>
+            </else>
+          </choose>
+          <choose>
+            <if variable="URL">
+              <text variable="URL" prefix=". "/>
+              <text macro="accessed" prefix=". "/>
+            </if>
+          </choose>
+        </else>
+      </choose>
+    </layout>
+  </bibliography>
+</style>
