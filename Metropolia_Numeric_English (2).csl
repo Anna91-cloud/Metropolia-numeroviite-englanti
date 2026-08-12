@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0.2"
+       class="in-text" default-locale="en-GB">
+  <info>
+    <title>Metropolia Numeric English</title>
+    <title-short>Metropolia Numeric</title-short>
+    <id>https://www.zotero.org/styles/metropolia-numeric-english</id>
+    <link href="https://www.zotero.org/styles/metropolia-numeric-english" rel="self"/>
+    <updated>2026-08-12T00:00:00+00:00</updated>
+  </info>
+
+  <macro name="author">
+    <names variable="author">
+      <name initialize-with=". " delimiter=", " and="text"
+            delimiter-precedes-last="always"/>
+      <label prefix=" (" suffix=")"/>
+    </names>
+  </macro>
+
+  <macro name="year">
+    <date variable="issued">
+      <date-part name="year"/>
+    </date>
+  </macro>
+
+  <macro name="accessed">
+    <date variable="accessed" prefix=" (link checked " suffix=")">
+      <date-part name="day" suffix="."/>
+      <date-part name="month" suffix="."/>
+      <date-part name="year"/>
+    </date>
+  </macro>
+
+  <citation>
+    <layout prefix="[" suffix="]" delimiter=",">
+      <text variable="citation-number"/>
+    </layout>
+  </citation>
+
+  <bibliography second-field-align="flush">
+    <sort>
+      <key variable="citation-number"/>
+    </sort>
+    <layout suffix=".">
+      <text variable="citation-number" prefix="[" suffix="] "/>
+
+      <choose>
+        <!-- Journal articles -->
+        <if type="article-journal article-magazine article-newspaper" match="any">
+          <text macro="author" suffix=". "/>
+          <text macro="year" suffix=". "/>
+          <text variable="title" suffix=". "/>
+          <text variable="container-title" font-style="italic" suffix=". "/>
+          <text variable="volume"/>
+          <text variable="issue" prefix="(" suffix=")"/>
+          <text variable="page" prefix=": " suffix=". "/>
+          <choose>
+            <if variable="DOI">
+              <text variable="DOI" prefix="https://doi.org/" suffix="."/>
+            </if>
+            <else-if variable="URL">
+              <text variable="URL" suffix="."/>
+              <text macro="accessed"/>
+            </else-if>
+          </choose>
+        </if>
+
+        <!-- Books -->
+        <else-if type="book" match="any">
+          <text macro="author" suffix=". "/>
+          <text macro="year" suffix=". "/>
+          <text variable="title" font-style="italic" suffix=". "/>
+          <text variable="edition" suffix=" ed. "/>
+          <text variable="publisher-place" suffix=": "/>
+          <text variable="publisher" suffix=". "/>
+          <choose>
+            <if variable="DOI">
+              <text variable="DOI" prefix="https://doi.org/" suffix="."/>
+            </if>
+            <else-if variable="URL">
+              <text variable="URL" suffix="."/>
+              <text macro="accessed"/>
+            </else-if>
+          </choose>
+        </else-if>
+
+        <!-- Chapters in books -->
+        <else-if type="chapter" match="any">
+          <text macro="author" suffix=". "/>
+          <text macro="year" suffix=". "/>
+          <text variable="title" suffix=". "/>
+          <text variable="container-title" font-style="italic" suffix=". "/>
+          <text variable="publisher-place" suffix=". "/>
+          <text variable="publisher" suffix=". "/>
+          <text variable="page" prefix="p. " suffix=". "/>
+          <choose>
+            <if variable="DOI">
+              <text variable="DOI" prefix="https://doi.org/" suffix="."/>
+            </if>
+            <else-if variable="URL">
+              <text variable="URL" suffix="."/>
+              <text macro="accessed"/>
+            </else-if>
+          </choose>
+        </else-if>
+
+        <!-- Web pages and other online sources -->
+        <else-if type="webpage post-weblog post" match="any">
+          <text macro="author" suffix=". "/>
+          <text macro="year" suffix=". "/>
+          <text variable="title" suffix=". "/>
+          <text variable="genre" suffix=". "/>
+          <text variable="publisher" suffix=". "/>
+          <choose>
+            <if variable="DOI">
+              <text variable="DOI" prefix="https://doi.org/" suffix="."/>
+            </if>
+            <else-if variable="URL">
+              <text value="Available: "/>
+              <text variable="URL" suffix="."/>
+              <text macro="accessed"/>
+            </else-if>
+          </choose>
+        </else-if>
+
+        <!-- Reports, standards and generic documents -->
+        <else>
+          <text macro="author" suffix=". "/>
+          <text macro="year" suffix=". "/>
+          <text variable="title" suffix=". "/>
+          <text variable="genre" suffix=". "/>
+          <text variable="publisher-place" suffix=": "/>
+          <text variable="publisher" suffix=". "/>
+          <choose>
+            <if variable="DOI">
+              <text variable="DOI" prefix="https://doi.org/" suffix="."/>
+            </if>
+            <else-if variable="URL">
+              <text value="Available: "/>
+              <text variable="URL" suffix="."/>
+              <text macro="accessed"/>
+            </else-if>
+          </choose>
+        </else>
+      </choose>
+    </layout>
+  </bibliography>
+</style>
